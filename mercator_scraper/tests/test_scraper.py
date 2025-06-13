@@ -1,7 +1,6 @@
-import pytest
 import requests
 from unittest.mock import MagicMock, patch
-from scraper import get_page, parse_project_section, transform_data
+from src.scraper import get_page, parse_project_section, transform_data
 
 def test_transform_data():
     raw_details = {
@@ -33,7 +32,7 @@ def test_parse_project_section():
     assert project_details["Project Number"] == "EABPRJ93000456"
     assert project_details["Location Address"] == "1600 SARAH DEWITT CENTER Gonzales, TX 78629"
 
-@patch("scraper.requests.get")
+@patch("src.scraper.requests.get")
 def test_get_page_success(mock):
     mock_response = MagicMock()
     mock_response.text = "<div>Sample Response</div>"
@@ -43,7 +42,7 @@ def test_get_page_success(mock):
     assert page_response == "<div>Sample Response</div>"
     assert mock.call_count == 1
 
-@patch("scraper.requests.get")
+@patch("src.scraper.requests.get")
 def test_get_page_failure(mock):
     mock.side_effect = requests.exceptions.HTTPError("404 Not Found")
     page_response = get_page("https://www.tdlr.texas.gov/TABS/Search/Project/sample", retries=2)
