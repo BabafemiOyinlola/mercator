@@ -1,4 +1,4 @@
-This is a python web scraper that extracts project information from the Texas Architectural Barriers Projects
+A python web scraper that extracts project information from the Texas Architectural Barriers Projects and saves the transformed data to JSON.
 
 
 ## How to run
